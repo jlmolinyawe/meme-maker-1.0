@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -9,16 +13,91 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="MemeMe1" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bm8-tm-IhM" userLabel="Top Toolbar">
+                                <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                                <items>
+                                    <barButtonItem title="Share" id="Lbe-wl-4iY" userLabel="Share"/>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="CFK-9e-oZV"/>
+                                    <barButtonItem title="Cancel" id="Kp5-d8-pEy"/>
+                                </items>
+                            </toolbar>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GiU-Cg-86t" userLabel="Bottom Toolbar">
+                                <rect key="frame" x="0.0" y="808" width="414" height="58"/>
+                                <items>
+                                    <barButtonItem title="Library" id="Zwx-83-UE5">
+                                        <connections>
+                                            <action selector="selectImage:" destination="BYZ-38-t0r" id="6iI-xo-vOh"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="FDW-4Z-sUi"/>
+                                    <barButtonItem title="Camera" id="NjE-8u-22M">
+                                        <connections>
+                                            <action selector="takeImageFromCamera:" destination="BYZ-38-t0r" id="rzp-6d-v3O"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bOH-TA-OZQ" userLabel="Image and Text View">
+                                <rect key="frame" x="0.0" y="88" width="414" height="720"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bWr-ZJ-9YF">
+                                        <rect key="frame" x="-1" y="-8" width="414" height="733"/>
+                                        <rect key="contentStretch" x="0.0" y="0.0" width="0.0" height="0.0"/>
+                                    </imageView>
+                                    <textField opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9hK-7f-pkp" userLabel="Top Text">
+                                        <rect key="frame" x="10" y="8" width="394" height="30"/>
+                                        <nil key="textColor"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hoP-qd-M33" userLabel="Bottom Text">
+                                        <rect key="frame" x="158" y="642" width="97" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
+                                    </textField>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="9hK-7f-pkp" firstAttribute="leading" secondItem="bOH-TA-OZQ" secondAttribute="leading" constant="10" id="hxY-jy-mFV"/>
+                                    <constraint firstAttribute="trailing" secondItem="9hK-7f-pkp" secondAttribute="trailing" constant="10" id="hyr-84-TMd"/>
+                                    <constraint firstItem="bWr-ZJ-9YF" firstAttribute="width" secondItem="bOH-TA-OZQ" secondAttribute="width" id="rfs-pK-de2"/>
+                                    <constraint firstItem="bWr-ZJ-9YF" firstAttribute="height" secondItem="bOH-TA-OZQ" secondAttribute="height" id="zR4-7l-B4b"/>
+                                </constraints>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="GiU-Cg-86t" firstAttribute="top" secondItem="bOH-TA-OZQ" secondAttribute="bottom" id="1Kf-pp-Nmp"/>
+                            <constraint firstItem="bm8-tm-IhM" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="8Er-ij-IhE"/>
+                            <constraint firstItem="bOH-TA-OZQ" firstAttribute="top" secondItem="bm8-tm-IhM" secondAttribute="bottom" id="9hj-5u-2Cs"/>
+                            <constraint firstItem="bOH-TA-OZQ" firstAttribute="bottom" secondItem="GiU-Cg-86t" secondAttribute="top" id="EW8-UC-gNc"/>
+                            <constraint firstItem="bOH-TA-OZQ" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="IJl-bO-o2E"/>
+                            <constraint firstItem="bm8-tm-IhM" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="IOR-pE-o4P"/>
+                            <constraint firstItem="bOH-TA-OZQ" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="UY0-zx-how"/>
+                            <constraint firstItem="GiU-Cg-86t" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Upr-IL-mMg"/>
+                            <constraint firstItem="GiU-Cg-86t" firstAttribute="bottom" secondItem="8bC-Xf-vdC" secondAttribute="bottom" constant="-30" id="VE2-rQ-YQ7"/>
+                            <constraint firstItem="bOH-TA-OZQ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Vo3-wv-PLh"/>
+                            <constraint firstItem="bOH-TA-OZQ" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="bD8-Hn-wmD"/>
+                            <constraint firstAttribute="trailing" secondItem="bm8-tm-IhM" secondAttribute="trailing" id="ewO-av-3cl"/>
+                            <constraint firstItem="bOH-TA-OZQ" firstAttribute="top" secondItem="bm8-tm-IhM" secondAttribute="bottom" id="mdX-L5-ceI"/>
+                            <constraint firstAttribute="trailing" secondItem="GiU-Cg-86t" secondAttribute="trailing" id="n5p-BQ-68k"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <connections>
+                        <outlet property="bottomTextField" destination="hoP-qd-M33" id="rlZ-xG-mnS"/>
+                        <outlet property="mainImageView" destination="bWr-ZJ-9YF" id="3vd-Jl-aTP"/>
+                        <outlet property="topTextField" destination="9hK-7f-pkp" id="3nI-df-psd"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="37.681159420289859" y="18.75"/>
         </scene>
     </scenes>
 </document>
