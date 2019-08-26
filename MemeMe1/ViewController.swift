@@ -57,8 +57,12 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             mainImageView.image = image
+            updateTextPosition()
             picker.dismiss(animated: true, completion: nil)
         }
+    }
+    
+    func updateTextPosition() {
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
