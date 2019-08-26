@@ -14,10 +14,10 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @IBOutlet weak var bottomTextField: UITextField!
     
     let memeTextAttributes: [NSAttributedString.Key: Any] = [
-        NSAttributedString.Key.strokeColor: UIColor.blue,
+        NSAttributedString.Key.strokeColor: UIColor.black,
         NSAttributedString.Key.foregroundColor: UIColor.white,
         NSAttributedString.Key.font: UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
-        NSAttributedString.Key.strokeWidth:  Float(3)
+        NSAttributedString.Key.strokeWidth:  Float(-4)
     ]
     
     let topDefaultValue = "TOP"
@@ -59,6 +59,17 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             mainImageView.image = image
             picker.dismiss(animated: true, completion: nil)
         }
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        if textField.text == topDefaultValue || textField.text == bottomDefaultValue {
+            textField.text = ""
+        }
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
 
 }
