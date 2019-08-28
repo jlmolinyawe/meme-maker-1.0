@@ -21,7 +21,7 @@
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bm8-tm-IhM" userLabel="Top Toolbar">
                                 <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                                 <items>
-                                    <barButtonItem title="Share" id="Lbe-wl-4iY" userLabel="Share"/>
+                                    <barButtonItem systemItem="action" id="Lbe-wl-4iY" userLabel="Share"/>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="CFK-9e-oZV"/>
                                     <barButtonItem title="Cancel" id="Kp5-d8-pEy"/>
                                 </items>
@@ -29,13 +29,13 @@
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GiU-Cg-86t" userLabel="Bottom Toolbar">
                                 <rect key="frame" x="0.0" y="808" width="414" height="58"/>
                                 <items>
-                                    <barButtonItem title="Library" id="Zwx-83-UE5">
+                                    <barButtonItem title="Library" image="collection" id="Zwx-83-UE5">
                                         <connections>
                                             <action selector="selectImage:" destination="BYZ-38-t0r" id="6iI-xo-vOh"/>
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="FDW-4Z-sUi"/>
-                                    <barButtonItem title="Camera" id="NjE-8u-22M">
+                                    <barButtonItem systemItem="camera" id="NjE-8u-22M">
                                         <connections>
                                             <action selector="takeImageFromCamera:" destination="BYZ-38-t0r" id="rzp-6d-v3O"/>
                                         </connections>
@@ -97,7 +97,10 @@
                     </view>
                     <connections>
                         <outlet property="bottomTextField" destination="hoP-qd-M33" id="rlZ-xG-mnS"/>
+                        <outlet property="cameraButton" destination="NjE-8u-22M" id="aPf-fh-DTF"/>
+                        <outlet property="libraryButton" destination="Zwx-83-UE5" id="y1Q-uC-int"/>
                         <outlet property="mainImageView" destination="bWr-ZJ-9YF" id="3vd-Jl-aTP"/>
+                        <outlet property="shareButton" destination="Lbe-wl-4iY" id="1TG-XA-AYn"/>
                         <outlet property="topTextField" destination="9hK-7f-pkp" id="3nI-df-psd"/>
                     </connections>
                 </viewController>
@@ -106,4 +109,7 @@
             <point key="canvasLocation" x="37.681159420289859" y="18.75"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="collection" width="30" height="30.5"/>
+    </resources>
 </document>
