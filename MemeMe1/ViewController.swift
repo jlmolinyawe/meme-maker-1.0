@@ -81,6 +81,14 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         }
     }
     
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if textField == topTextField {
+            textField.text = topDefaultValue
+        } else if textField == bottomTextField {
+            textField.text = bottomDefaultValue
+        }
+    }
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
