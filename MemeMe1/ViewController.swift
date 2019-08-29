@@ -15,6 +15,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @IBOutlet weak var libraryButton: UIBarButtonItem!
     @IBOutlet weak var cameraButton: UIBarButtonItem!
     @IBOutlet weak var shareButton: UIBarButtonItem!
+    @IBOutlet weak var topToolbar: UIToolbar!
+    @IBOutlet weak var bottomToolbar: UIToolbar!
     
     let memeTextAttributes: [NSAttributedString.Key: Any] = [
         NSAttributedString.Key.strokeColor: UIColor.black,
@@ -25,6 +27,13 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     let topDefaultValue = "TOP"
     let bottomDefaultValue = "BOTTOM"
+    
+    struct Meme {
+        var topText: String
+        var bottomText: String
+        var originalImage: UIImage
+        var memedImage: UIImage
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,6 +55,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         cameraButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
+//        shareButton.isEnabled = false
         subscribeToKeyboardNotifications()
     }
     
@@ -75,17 +85,23 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         }
     }
     
+    // MARK: Clear default text when editing
+    
     func textFieldDidBeginEditing(_ textField: UITextField) {
         if textField.text == topDefaultValue || textField.text == bottomDefaultValue {
             textField.text = ""
         }
     }
     
+    // MARK: Set empty fields back to default
+    
     func textFieldDidEndEditing(_ textField: UITextField) {
-        if textField == topTextField {
-            textField.text = topDefaultValue
-        } else if textField == bottomTextField {
-            textField.text = bottomDefaultValue
+        if textField.text == "" {
+            if textField == topTextField {
+                textField.text = topDefaultValue
+            } else if textField == bottomTextField {
+                textField.text = bottomDefaultValue
+            }
         }
     }
     
@@ -105,7 +121,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     @objc func keyboardWillShow(_ notification:Notification) {
-//        view.frame.origin.y -= getKeyboardHeight(notification)
         if view.frame.origin.y == 0 {
             view.frame.origin.y -= getKeyboardHeight(notification)
         }
@@ -121,6 +136,34 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         let userInfo = notification.userInfo
         let keyboardSize = userInfo![UIResponder.keyboardFrameEndUserInfoKey] as! NSValue // of CGRect
         return keyboardSize.cgRectValue.height
+    }
+    
+    func generateMemedImage() -> UIImage {
+        // TODO: Hide toolbar and navbar
+        topToolbar.isHidden = true
+        bottomToolbar.isHidden = true
+        
+        // Render view to an image
+        UIGraphicsBeginImageContext(self.view.frame.size)
+        view.drawHierarchy(in: self.view.frame, afterScreenUpdates: true)
+        let memedImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()!
+        UIGraphicsEndImageContext()
+        
+        // TODO: Show toolbar and navbar
+        topToolbar.isHidden = false
+        bottomToolbar.isHidden = false
+        
+        return memedImage
+    }
+    
+    @IBAction func save() {
+        // Generate image
+        let memedImage = generateMemedImage()
+        // Create the meme
+        let meme = Meme(topText: topTextField.text!, bottomText: bottomTextField.text!, originalImage: mainImageView.image!, memedImage: memedImage)
+        let activityViewController = UIActivityViewController(activityItems: [meme.memedImage], applicationActivities: [])
+        present(activityViewController, animated: true)
+//        mainImageView.image = memedImage.withHorizontallyFlippedOrientation()
     }
 }
 

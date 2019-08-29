@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina6_1" orientation="portrait">
+    <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -15,19 +15,23 @@
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="MemeMe1" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bm8-tm-IhM" userLabel="Top Toolbar">
-                                <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                                 <items>
-                                    <barButtonItem systemItem="action" id="Lbe-wl-4iY" userLabel="Share"/>
+                                    <barButtonItem systemItem="action" id="Lbe-wl-4iY" userLabel="Share">
+                                        <connections>
+                                            <action selector="save" destination="BYZ-38-t0r" id="Fmd-cb-TxD"/>
+                                        </connections>
+                                    </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="CFK-9e-oZV"/>
                                     <barButtonItem title="Cancel" id="Kp5-d8-pEy"/>
                                 </items>
                             </toolbar>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GiU-Cg-86t" userLabel="Bottom Toolbar">
-                                <rect key="frame" x="0.0" y="808" width="414" height="58"/>
+                                <rect key="frame" x="0.0" y="603" width="375" height="64"/>
                                 <items>
                                     <barButtonItem title="Library" image="collection" id="Zwx-83-UE5">
                                         <connections>
@@ -43,20 +47,20 @@
                                 </items>
                             </toolbar>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bOH-TA-OZQ" userLabel="Image and Text View">
-                                <rect key="frame" x="0.0" y="88" width="414" height="720"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="539"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bWr-ZJ-9YF">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="720"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="539"/>
                                         <rect key="contentStretch" x="0.0" y="0.0" width="0.0" height="0.0"/>
                                     </imageView>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9hK-7f-pkp" userLabel="Top Text">
-                                        <rect key="frame" x="0.0" y="30" width="414" height="17"/>
+                                        <rect key="frame" x="8" y="30" width="359" height="17"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hoP-qd-M33" userLabel="Bottom Text">
-                                        <rect key="frame" x="20" y="673" width="414" height="17"/>
+                                        <rect key="frame" x="8" y="492" width="359" height="17"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
@@ -64,12 +68,12 @@
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="bWr-ZJ-9YF" firstAttribute="leading" secondItem="bOH-TA-OZQ" secondAttribute="leading" id="4B7-JN-jKd"/>
-                                    <constraint firstItem="hoP-qd-M33" firstAttribute="leading" secondItem="bOH-TA-OZQ" secondAttribute="leading" constant="20" symbolic="YES" id="T4D-Xc-Jfj"/>
+                                    <constraint firstItem="hoP-qd-M33" firstAttribute="leading" secondItem="bOH-TA-OZQ" secondAttribute="leadingMargin" id="T4D-Xc-Jfj"/>
                                     <constraint firstItem="9hK-7f-pkp" firstAttribute="top" secondItem="bWr-ZJ-9YF" secondAttribute="top" constant="30" id="TNe-LE-HXI"/>
-                                    <constraint firstItem="hoP-qd-M33" firstAttribute="trailing" secondItem="bOH-TA-OZQ" secondAttribute="trailing" constant="20" symbolic="YES" id="WsW-Au-dvz"/>
+                                    <constraint firstItem="hoP-qd-M33" firstAttribute="trailing" secondItem="bOH-TA-OZQ" secondAttribute="trailingMargin" id="WsW-Au-dvz"/>
                                     <constraint firstItem="bWr-ZJ-9YF" firstAttribute="top" secondItem="bOH-TA-OZQ" secondAttribute="top" id="ZD2-rz-kBy"/>
-                                    <constraint firstItem="9hK-7f-pkp" firstAttribute="leading" secondItem="bOH-TA-OZQ" secondAttribute="leading" id="hxY-jy-mFV"/>
-                                    <constraint firstItem="9hK-7f-pkp" firstAttribute="trailing" secondItem="bOH-TA-OZQ" secondAttribute="trailing" id="hyr-84-TMd"/>
+                                    <constraint firstItem="9hK-7f-pkp" firstAttribute="leading" secondItem="bOH-TA-OZQ" secondAttribute="leadingMargin" id="hxY-jy-mFV"/>
+                                    <constraint firstItem="9hK-7f-pkp" firstAttribute="trailing" secondItem="bOH-TA-OZQ" secondAttribute="trailingMargin" id="hyr-84-TMd"/>
                                     <constraint firstItem="bWr-ZJ-9YF" firstAttribute="width" secondItem="bOH-TA-OZQ" secondAttribute="width" id="rfs-pK-de2"/>
                                     <constraint firstItem="hoP-qd-M33" firstAttribute="bottom" secondItem="bWr-ZJ-9YF" secondAttribute="bottom" constant="-30" id="wHr-rZ-q7Y"/>
                                     <constraint firstItem="bWr-ZJ-9YF" firstAttribute="height" secondItem="bOH-TA-OZQ" secondAttribute="height" id="zR4-7l-B4b"/>
@@ -86,22 +90,24 @@
                             <constraint firstItem="bm8-tm-IhM" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="IOR-pE-o4P"/>
                             <constraint firstItem="bOH-TA-OZQ" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="UY0-zx-how"/>
                             <constraint firstItem="GiU-Cg-86t" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Upr-IL-mMg"/>
-                            <constraint firstItem="GiU-Cg-86t" firstAttribute="bottom" secondItem="8bC-Xf-vdC" secondAttribute="bottom" constant="-30" id="VE2-rQ-YQ7"/>
+                            <constraint firstItem="GiU-Cg-86t" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="VE2-rQ-YQ7"/>
                             <constraint firstItem="bOH-TA-OZQ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Vo3-wv-PLh"/>
                             <constraint firstItem="bOH-TA-OZQ" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="bD8-Hn-wmD"/>
                             <constraint firstAttribute="trailing" secondItem="bm8-tm-IhM" secondAttribute="trailing" id="ewO-av-3cl"/>
                             <constraint firstItem="bOH-TA-OZQ" firstAttribute="top" secondItem="bm8-tm-IhM" secondAttribute="bottom" id="mdX-L5-ceI"/>
-                            <constraint firstAttribute="trailing" secondItem="GiU-Cg-86t" secondAttribute="trailing" id="n5p-BQ-68k"/>
+                            <constraint firstItem="GiU-Cg-86t" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailing" id="n5p-BQ-68k"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
                         <outlet property="bottomTextField" destination="hoP-qd-M33" id="rlZ-xG-mnS"/>
+                        <outlet property="bottomToolbar" destination="GiU-Cg-86t" id="iHC-UN-JZR"/>
                         <outlet property="cameraButton" destination="NjE-8u-22M" id="aPf-fh-DTF"/>
                         <outlet property="libraryButton" destination="Zwx-83-UE5" id="y1Q-uC-int"/>
                         <outlet property="mainImageView" destination="bWr-ZJ-9YF" id="3vd-Jl-aTP"/>
                         <outlet property="shareButton" destination="Lbe-wl-4iY" id="1TG-XA-AYn"/>
                         <outlet property="topTextField" destination="9hK-7f-pkp" id="3nI-df-psd"/>
+                        <outlet property="topToolbar" destination="bm8-tm-IhM" id="EaM-qF-qVk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
