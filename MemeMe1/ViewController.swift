@@ -28,13 +28,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     let topDefaultValue = "TOP"
     let bottomDefaultValue = "BOTTOM"
     
-    struct Meme {
-        var topText: String
-        var bottomText: String
-        var originalImage: UIImage
-        var memedImage: UIImage
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -42,8 +35,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         topTextField.delegate = self
         bottomTextField.delegate = self
         
-        topTextField.text = topDefaultValue
-        bottomTextField.text = bottomDefaultValue
+        setTextFieldToDefault()
         
         topTextField.defaultTextAttributes = memeTextAttributes
         bottomTextField.defaultTextAttributes = memeTextAttributes
@@ -55,7 +47,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         cameraButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
-//        shareButton.isEnabled = false
+        shareButton.isEnabled = mainImageView.image != nil
         subscribeToKeyboardNotifications()
     }
     
@@ -76,6 +68,16 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         imageController.delegate = self
         imageController.sourceType = .camera
         present(imageController, animated: true, completion: nil)
+    }
+    
+    @IBAction func cancelMeme() {
+        setTextFieldToDefault()
+        mainImageView.image = nil
+    }
+    
+    func setTextFieldToDefault() {
+        topTextField.text = topDefaultValue
+        bottomTextField.text = bottomDefaultValue
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
@@ -139,7 +141,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     func generateMemedImage() -> UIImage {
-        // TODO: Hide toolbar and navbar
+        // Hide toolbar and navbar
         topToolbar.isHidden = true
         bottomToolbar.isHidden = true
         
@@ -149,21 +151,33 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         let memedImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()!
         UIGraphicsEndImageContext()
         
-        // TODO: Show toolbar and navbar
+        // Show toolbar and navbar
         topToolbar.isHidden = false
         bottomToolbar.isHidden = false
         
         return memedImage
     }
     
-    @IBAction func save() {
+    @IBAction func share() {
         // Generate image
-        let memedImage = generateMemedImage()
+        let memeImage = generateMemedImage()
+        
         // Create the meme
-        let meme = Meme(topText: topTextField.text!, bottomText: bottomTextField.text!, originalImage: mainImageView.image!, memedImage: memedImage)
-        let activityViewController = UIActivityViewController(activityItems: [meme.memedImage], applicationActivities: [])
+        let meme = Meme.meme(topText: topTextField.text!, bottomText: bottomTextField.text!, originalImage: mainImageView.image!, memeImage: memeImage)
+        let activityViewController = UIActivityViewController(activityItems: [meme.memeImage], applicationActivities: [])
+        activityViewController.completionWithItemsHandler = { (activityType: UIActivity.ActivityType?, completed: Bool, returnedItems: [Any]?, error: Error?) in
+            if !completed {
+                self.save(meme)
+                return
+            }
+        }
         present(activityViewController, animated: true)
-//        mainImageView.image = memedImage.withHorizontallyFlippedOrientation()
     }
+    
+    // TODO: Not sure what to do with this portion
+    func save(_ meme: Meme.meme) {
+        
+    }
+
 }
 
