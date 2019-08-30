@@ -18,12 +18,12 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @IBOutlet weak var topToolbar: UIToolbar!
     @IBOutlet weak var bottomToolbar: UIToolbar!
     
-    let memeTextAttributes: [NSAttributedString.Key: Any] = [
-        NSAttributedString.Key.strokeColor: UIColor.black,
-        NSAttributedString.Key.foregroundColor: UIColor.white,
-        NSAttributedString.Key.font: UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
-        NSAttributedString.Key.strokeWidth:  Float(-4)
-    ]
+    struct Meme {
+        var topText: String
+        var bottomText: String
+        var originalImage: UIImage
+        var memeImage: UIImage
+    }
     
     let topDefaultValue = "TOP"
     let bottomDefaultValue = "BOTTOM"
@@ -31,17 +31,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
- 
-        topTextField.delegate = self
-        bottomTextField.delegate = self
-        
-        setTextFieldToDefault()
-        
-        topTextField.defaultTextAttributes = memeTextAttributes
-        bottomTextField.defaultTextAttributes = memeTextAttributes
-        
-        topTextField.textAlignment = .center
-        bottomTextField.textAlignment = .center
+        configureTextField(topTextField, text: topDefaultValue)
+        configureTextField(bottomTextField, text: bottomDefaultValue)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -57,22 +48,36 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
 
     @IBAction func selectImage(_ sender: Any) {
-        let imageController = UIImagePickerController()
-        imageController.delegate = self
-        imageController.sourceType = .photoLibrary
-        present(imageController, animated: true, completion: nil)
+        pickImage(UIImagePickerController.SourceType.photoLibrary)
     }
     
     @IBAction func takeImageFromCamera(_ sender: Any) {
+        pickImage(UIImagePickerController.SourceType.camera)
+    }
+    
+    func pickImage(_ source: UIImagePickerController.SourceType) {
         let imageController = UIImagePickerController()
         imageController.delegate = self
-        imageController.sourceType = .camera
+        imageController.sourceType = source
         present(imageController, animated: true, completion: nil)
     }
     
     @IBAction func cancelMeme() {
-        setTextFieldToDefault()
+        configureTextField(topTextField, text: topDefaultValue)
+        configureTextField(bottomTextField, text: bottomDefaultValue)
         mainImageView.image = nil
+    }
+    
+    func configureTextField(_ textField: UITextField, text: String) {
+        textField.text = text
+        textField.delegate = self
+        textField.defaultTextAttributes = [
+            .font: UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
+            .foregroundColor: UIColor.white,
+            .strokeColor: UIColor.black,
+            .strokeWidth: -4
+        ]
+        textField.textAlignment = .center // Had to set this after setting the defaultTextAttributes, otherwise it would not center
     }
     
     func setTextFieldToDefault() {
@@ -123,7 +128,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     @objc func keyboardWillShow(_ notification:Notification) {
-        if view.frame.origin.y == 0 {
+        if bottomTextField.isEditing {
             view.frame.origin.y -= getKeyboardHeight(notification)
         }
     }
@@ -163,10 +168,10 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         let memeImage = generateMemedImage()
         
         // Create the meme
-        let meme = Meme.meme(topText: topTextField.text!, bottomText: bottomTextField.text!, originalImage: mainImageView.image!, memeImage: memeImage)
+        let meme = Meme(topText: topTextField.text!, bottomText: bottomTextField.text!, originalImage: mainImageView.image!, memeImage: memeImage)
         let activityViewController = UIActivityViewController(activityItems: [meme.memeImage], applicationActivities: [])
         activityViewController.completionWithItemsHandler = { (activityType: UIActivity.ActivityType?, completed: Bool, returnedItems: [Any]?, error: Error?) in
-            if !completed {
+            if completed {
                 self.save(meme)
                 return
             }
@@ -175,7 +180,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     // TODO: Not sure what to do with this portion
-    func save(_ meme: Meme.meme) {
+    func save(_ meme: Meme) {
         
     }
 

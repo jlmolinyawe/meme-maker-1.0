@@ -8,11 +8,9 @@
 
 import UIKit
 
-class Meme {
-    struct meme {
-        var topText: String
-        var bottomText: String
-        var originalImage: UIImage
-        var memeImage: UIImage
-    }
+struct Meme {
+    var topText: String
+    var bottomText: String
+    var originalImage: UIImage
+    var memeImage: UIImage
 }

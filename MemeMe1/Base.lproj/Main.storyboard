@@ -104,7 +104,7 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
-                        <outlet property="bottomTextField" destination="hoP-qd-M33" id="rlZ-xG-mnS"/>
+                        <outlet property="bottomTextField" destination="hoP-qd-M33" id="6yT-XG-iCH"/>
                         <outlet property="bottomToolbar" destination="GiU-Cg-86t" id="iHC-UN-JZR"/>
                         <outlet property="cameraButton" destination="NjE-8u-22M" id="aPf-fh-DTF"/>
                         <outlet property="libraryButton" destination="Zwx-83-UE5" id="y1Q-uC-int"/>

@@ -2,6 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>To allow access to existing photos</string>
+	<key>NSCameraUsageDescription</key>
+	<string>To capture live pictures as a meme</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>To save newly created Memes</string>
 	<key>CFBundleDevelopmentRegion</key>
