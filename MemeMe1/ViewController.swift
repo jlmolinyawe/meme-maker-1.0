@@ -65,6 +65,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @IBAction func cancelMeme() {
         configureTextField(topTextField, text: topDefaultValue)
         configureTextField(bottomTextField, text: bottomDefaultValue)
+        shareButton.isEnabled = false
         mainImageView.image = nil
     }
     
